@@ -1,4 +1,4 @@
-package ex2;
+package DailyTest;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
