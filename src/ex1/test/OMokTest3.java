@@ -30,53 +30,108 @@ public class OMokTest3 {
 		int temp = 0;
 		boolean point = true;
 		while (point) {
-			{
-				if (temp % 2 != 0)
-					System.out.println("검은 공 차례");
-				else
-					System.out.println("흰 공 차례");
 
-				// 유저 공 위치 입력
-				System.out.println("(x,y)> ");
-				int ox, oy;
-				Scanner sc = new Scanner(System.in);
-				ox = sc.nextInt();
+			if (temp % 2 != 0)
+				System.out.println("검은 공 차례");
+			else
+				System.out.println("흰 공 차례");
 
-				if (ox == 3000) {
-					System.out.println("종료합니다.");
+			// 유저 공 위치 입력
+			System.out.println("(x,y)> ");
+			int ox, oy;
+			Scanner sc = new Scanner(System.in);
+			ox = sc.nextInt();
+
+			if (ox == 3000) {
+				System.out.println("종료합니다.");
+				break;
+			}
+			oy = sc.nextInt();
+
+			// 바둑알 표현 및 공 바뀌지 않게 방지하기
+			if (board[oy - 1][ox - 1] != '┼') {
+				System.out.println("해당 자리에는 공이 존재합니다.");
+				continue;
+			} else if (temp % 2 != 0)
+				board[oy - 1][ox - 1] = '○';
+			else
+				board[oy - 1][ox - 1] = '●';
+
+			// 승리 시 표현 후 끝내기
+			int count = 0;
+			// 가로로 5열을 세워 이겼을 때
+			for (int y = 0; y < 10; y++) {
+
+				for (int x = 0; x < 10; x++) {
+
+					for (int i = 1; i <= 4; i++) {
+						char c = board[y][x];
+						if (x > 5)
+							break;
+						else if (board[y][x + 1] == '┼')
+							break;
+						else if (c != board[y][x + i]) {
+							count = 0;
+							break;
+						} else if (c == board[y][x + i]) {
+							count++;
+							if (count == 4) {
+								System.out.println("승리");
+								System.out.println("게임이 종료됩니다.");
+								System.out.println("결과");
+								point = false;
+
+							}
+						}
+					}
+				}
+			}
+
+			// 세로로 5열을 세워 이겼을 때
+			for (int y = 0; y < 10; y++) {
+
+				for (int x = 0; x < 10; x++) {
+
+					for (int i = 1; i <= 4; i++) {
+						char c = board[y][x];
+						if (y > 5)
+							break;
+						else if (board[y + 1][x] == '┼')
+							break;
+						else if (c != board[y + i][x]) {
+							count = 0;
+							break;
+						} else if (c == board[y + i][x]) {
+							count++;
+							if (count == 4) {
+								System.out.println("승리");
+								System.out.println("게임이 종료됩니다.");
+								System.out.println("결과");
+								point = false;
+
+							}
+						}
+					}
+				}
+			}
+			// 대각선 승리
+			for (int y = 0; y < 10; y++) {
+				if(y>6)
 					break;
-				}
-				oy = sc.nextInt();
-
-				// 바둑알 표현 및 공 바뀌지 않게 방지하기
-				if (board[oy - 1][ox - 1] != '┼') {
-					System.out.println("해당 자리에는 공이 존재합니다.");
-					continue;
-				} else if (temp % 2 != 0)
-					board[oy - 1][ox - 1] = '○';
-				else
-					board[oy - 1][ox - 1] = '●';
-
-				// 승리 시 표현 후 끝내기
-				int count = 0;
-				// 가로로 5열을 세워 이겼을 때
-				for (int y = 0; y < 10; y++) {
-
-					for (int x = 0; x < 10; x++) {
-						
+				for (int x = 0; x < 10; x++) {
+					if (x < 5) {
 						for (int i = 1; i <= 4; i++) {
 							char c = board[y][x];
-							if(x>5)
+						
+							if (board[y + 1][x + 1] == '┼' )
 								break;
-							else if (board[y][x + 1] == '┼')
-								break;
-							else if (c != board[y][x + i]) {
+							else if (c != board[y + i][x + i]) {
 								count = 0;
 								break;
-							}
-							else if (c == board[y][x+i]) {
+								}
+							 else if (c == board[y + i][x + i]) {
 								count++;
-								if(count ==4) {
+								if (count == 4) {
 									System.out.println("승리");
 									System.out.println("게임이 종료됩니다.");
 									System.out.println("결과");
@@ -85,51 +140,50 @@ public class OMokTest3 {
 								}
 							}
 						}
-					}
-				}
-				
-				// 세로로 5열을 세워 이겼을 때
-				for (int y = 0; y < 10; y++) {
-
-					for (int x = 0; x < 10; x++) {
-						
+					} else if (x >= 5) {
 						for (int i = 1; i <= 4; i++) {
 							char c = board[y][x];
-							if(y>5)
+							if (board[y + 1][x - 1] == '┼')
 								break;
-							else if (board[y+1][x] == '┼')
-								break;
-							else if (c != board[y + i][x]) {
+							else if (c != board[y + i][x - i]) {
 								count = 0;
 								break;
-							}
-							else if (c == board[y+i][x]) {
+							} else if (c == board[y + i][x - i]) {
 								count++;
-								if(count ==4) {
+								if (count == 4) {
 									System.out.println("승리");
 									System.out.println("게임이 종료됩니다.");
 									System.out.println("결과");
 									point = false;
-									
+
 								}
 							}
 						}
 					}
+
 				}
-				 //temp 값에 따른 흑백공 변화
+			}
+			printBoard(board);
+			// temp 값에 따른 흑백공 변화
 //				temp++;
-			}
+		}
 
-			// 보드 출력
-			{
-				for (int y = 1; y <= 10; y++) {
-					for (int x = 1; x <= 10; x++)
-						System.out.printf("%c", board[y - 1][x - 1]);
-					System.out.println();
-				}
+		// 보드 출력
+		{
+			for (int y = 1; y <= 10; y++) {
+				for (int x = 1; x <= 10; x++)
+					System.out.printf("%c", board[y - 1][x - 1]);
+				System.out.println();
 			}
+		}
 
+	}
+	
+	static void printBoard(char board[][]) {
+		for (int y = 1; y <= 10; y++) {
+			for (int x = 1; x <= 10; x++)
+				System.out.printf("%c", board[y - 1][x - 1]);
+			System.out.println();
 		}
 	}
-
 }
