@@ -1,8 +1,10 @@
-package ex1.test;
+package ex3.func;
 
 import java.util.Random;
 
 public class Arraytest {
+	
+	static int[] nums = { 20, 5, 7, 98, 45, 7, 45, 62, 12, 47 };
 	
 	static void printNums(int[] nums) {
 		for (int i = 0; i < 10; i++) {
@@ -28,7 +30,7 @@ public class Arraytest {
 //		
 //		int[][] ar3 = new int[3][];
 
-		int[] nums = { 20, 5, 7, 98, 45, 7, 45, 62, 12, 47 };
+		
 		printNums(nums);
 		
 		Random rand = new Random();
