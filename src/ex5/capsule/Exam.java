@@ -9,9 +9,13 @@ public class Exam {
 
 	// 생성자 (함수는 아님. 이름이 없음. 하지만 특징은 함수임.)
 	public Exam() {
-		kor = 30;
-		eng = 30;
-		math = 30;
+		this(0,0,0); // this 값이 사용된 적이 없어야 한다.
+	}
+	
+	public Exam(int kor, int eng, int math) {
+		this.kor = kor;
+		this.eng = eng;
+		this.math = math;
 	}
 
 	public void init() {
@@ -42,14 +46,40 @@ public class Exam {
 	public void print() {
 		// TODO Auto-generated method stub
 		// int kor = 10; //(kor 우선순위는 this보다 지역변수)
+		print('-');
+	}
+
+	public void print(char ch) {
+		print(ch, 30);
+	}
+
+	public void print(char ch, int length) {
+		
+		int total = total();
+		double avg = avg();
 		System.out.printf("kor:%d\n", this.kor); // this.kor 쓰지 않아도 됨. 속성을 찾아봄
 		System.out.printf("eng:%d\n", this.eng);
 		System.out.printf("math:%d\n", this.math);
-		System.out.println("------------------------");
+		System.out.printf("total:%d\n", total);
+		System.out.printf("avg:%.2f\n",avg);
+
+		for (int i = 0; i < length; i++)
+			System.out.printf("%c", ch);
+		
+		System.out.println();
+	}
+
+	private double avg() {
+		return total()/3.0;
+	}
+
+	private int total() {
+		
+		return kor+eng+math;
 	}
 
 	static void inputExam(Exam 뉴렉성적) {
-		// TODO Auto-generated method stub
+		
 		int kor = 뉴렉성적.kor;
 
 		System.out.printf("kor:%d\n", kor);
