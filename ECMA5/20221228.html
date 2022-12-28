@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    var add = function(x,y){
+    return x+y;    
+    }
+    console.log(add(3,4,5,6));
+    
+    function add2(){
+        return arguments[0] + arguments[2];
+    }
+    console.log(add2(4,5,6));
+
+    window.b=2;
+    window.alert(window.b); // window 전역객체
+
+    // alert(a);
+    // a = 1; // a in not defined => window 객체로 생성되지도 않았음.
+
+    alert(c); //undefined ....????????????????????
+    var c = 3; 
+
+    var f1 = function(){
+        var a;
+        console.log(a);
+        console.log(window.a);
+        
+    }
+    f1();
+
+    {var f = 1;}
+    alert(f);
+
+    var f3;
+    function f5() {
+        var a = 10;
+        
+        var f6 = function() {
+            a++;
+        }
+        f6();
+
+        f3 = f6; // 메모리 누수의 원인.
+        console.log(a);
+
+    }
+    f5();
+    f5();
+
+    var funcs = [];
+
+    for(var i=0; i<3; i++) 
+        funcs[i] = function(){
+            console.log(i);
+        }
+    
+    for(var a=0; a<3; a++)
+        funcs[a]();
+        
+    funcs[0]();
+    funcs[1]();
+    funcs[2]();
+    
+
+        
+    
+    
+
+
+
+</script>
+
+
+
+</body>
+</html>

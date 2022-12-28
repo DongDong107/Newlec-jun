@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+      function Exam() {
+            this.kor=30;
+            this.eng=50;
+            this.math=70;
+
+            this.total = function(){
+                return this.kor+this.eng+this.math;
+            }
+            
+      }
+
+      var exam = new Exam();
+      console.log(exam.total());
+      
+      var exam1 = new Exam();
+      console.log(exam1.total());
+    //   Exam();
+    //   var exam1 = new Exam();
+    //   console.log(exam1);
+    //   console.log(exam1.kor);
+    //   console.log(kor);
+
+    </script>
+    
+</body>
+</html>
