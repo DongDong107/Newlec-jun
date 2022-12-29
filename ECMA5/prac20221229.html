@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+var a = 5;
+var b = 8;
+var c = 3;
+
+var temp = a;
+a = c;
+c = temp;
+
+temp = b;
+b = c;
+c = temp;
+
+console.log(a);
+console.log(b);
+console.log(c);
+//------------------------------------------------------
+var arr = [5,7,3];
+
+for(var i=0; i<3-1; i++){
+    for(var j=0; j<3-1-1; j++){
+        if(arr[i]<arr[i+1]){
+            var temp1 = arr[i];
+            arr[i] = arr[i+1];
+            arr[i+1] = temp1;
+        }
+    }
+}
+
+for(var i=0; i<arr.length; i++){
+    console.log(arr[i]);
+}
+//-------------------------
+
+
+// var age = prompt("나이를 알려주세요",18);
+// switch(age){
+//     case '18' :
+//         alert("낭랑 18세네요!");
+//         break;
+//     case '19' :
+//         alert("성인이시네요");
+//         break;
+//     default:
+//         alert("잘못 입력하셨습니다.");
+//         break;
+//     }
+    
+//-------------------------------------
+var user = {name:'LJJ', age:27, addr:'SEOUL'};
+console.log(user.addr);
+console.log(user.age);
+
+var obj =
+[
+    {"sgg_cd":"1111000000","emd_nm":"경운동","node_code":"0","emd_cd":"1111013400","node_wkt":"POINT(126.98515892357797 37.57622646659184)","sgg_nm":"종로구","type":"NODE","sw_nm":"안국","sw_cd":"269","node_id":211632},
+    {"sgg_cd":"1111000000","emd_nm":"묘동","node_code":"1","emd_cd":"1111015100","node_wkt":"POINT(126.99189784557106 37.57254045459208)","sgg_nm":"종로구","type":"NODE","sw_nm":null,"sw_cd":null,"node_id":135561},
+    {"sgg_cd":"1111000000","emd_nm":"돈의동","node_code":"1","emd_cd":"1111015300","node_wkt":"POINT(126.99104038125857 37.572655707708435)","sgg_nm":"종로구","type":"NODE","sw_nm":null,"sw_cd":null,"node_id":135567}
+]
+
+for(var i=0; i<obj.length; i++)
+    console.log(obj[i].node_id);
+
+var date1 = new Date();
+var date2 = new Date(2007,11,25,3,40);
+var date3 = new Date('2022-05-08');
+var date4 = new Date('2022-05-08 10:20:30');
+
+console.log(date4);
+var y = date4.getFullYear();
+var m = date4.getMonth(); //0~11
+console.log(m);
+
+var h = date1.getHours();
+console.log("시간: "+ h);
+
+var input = Number(prompt());
+if(input%2==0){
+    console.log("짝수");    
+}else
+    console.log("홀수");
+
+var num = [];
+for(var i=0; i<30; i++){
+    num.push(i+1);
+}
+console.log(num.join(" "));
+</script>
+<body>
+    
+</body>
+</html>

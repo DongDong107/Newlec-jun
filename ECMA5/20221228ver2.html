@@ -13,18 +13,58 @@
             this.eng=50;
             this.math=70;
 
-            this.total = function(){
-                return this.kor+this.eng+this.math;
-            }
-            
+            // this.total = function(){
+            //     return this.kor+this.eng+this.math;
+            // }            
       }
+      Exam.prototype = {
+        total: function() {
+            return this.kor+this.eng+this.math;
+        },
+        avg:function(){
+            return this.total()/3;
+        }
+      }
+      
+      Array.prototype.total = function(){
+        return 40;
+      }
+      // Array.prototype = {} ; 이렇게 선언하면 Array가 가진 기능이 변해서 작동을 못함.
 
-      var exam = new Exam();
+      var ar = [];
+      ar.total = function(){
+        return 40;
+      }
+      console.log(ar.total());
+      console.log(ar.constructor === Array);
+      console.log(typeof ar.constructor);
+      console.log(typeof Array);
+
+      ar.constructor.prototype.avg = function() {
+        console.log("프이영균");
+      }
+      ar.avg();
+      
+      var ar1 = [];
+      console.log(ar1.total());
+           
+      ar1.avg();
+
+      console.log(Array.prototype.constructor.prototype);
+
+      var exam = new Exam();      
+      exam.kor =60;
       console.log(exam.total());
+      console.log(exam.avg());
       
       var exam1 = new Exam();
       console.log(exam1.total());
+
+      var exam2 = Object.create(exam);
+      console.log(exam);
+      console.log(exam2);
     //   Exam();
+
     //   var exam1 = new Exam();
     //   console.log(exam1);
     //   console.log(exam1.kor);
