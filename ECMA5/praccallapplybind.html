@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+                      
+    function Box() {
+                        
+    }
+
+    Box.prototype = {
+        test:function(){
+            console.log(this);
+         
+        }
+    }
+
+    var box1 = new Box();
+    box1.test(); // window box
+    var f1 = box1.test;
+    f1(); // windows.f1();
+    
+    var n1 = {id:1, title:'hello'};
+    //call
+    var obj = {kor:2};
+    obj.f1 = box1.test;
+    obj.f1(); // obj
+    obj.onload = box1.test; 
+    obj.onload.call(n1);
+/*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
+// apply
+
+    function Box2(){}
+    Box2.prototype = {
+        test:function(){
+            console.log(this);
+            console.log(arguments[0]);
+            console.log(this.title);
+        }
+    }
+    var box3 = new Box2();
+
+    var obj2= {eng:2};
+    obj2.f2 = box3.test;
+
+
+    obj2.f2.apply(n1,['hi','okay']);
+
+
+
+
+
+
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
