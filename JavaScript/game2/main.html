@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="./item/back-ground.js"></script>
+<script src="./item/boy.js"></script>
+<script src="./panel/game-canvas.js"></script>
+<script src="app.js"></script>
+<script>
+	let kor=30;
+	let eng=30;
+	let obj= {
+		kor:kor,
+		eng:eng,
+		total: function(){
+			return this.kor+this.eng;
+		}
+	}
+
+	function print(exam){
+		console.log("kor:"+exam.kor);
+		console.log("eng:"+exam.eng);
+		// console.log("total:"+exam.total());
+	}
+	print(obj);
+
+	let obj1 = {kor,eng, total(){
+		return this.kor+this.eng;
+	}};
+
+	//디스
+	function print1({kor,eng}){
+
+		console.log("kor:"+kor);
+		console.log("eng:"+eng);
+		
+	}
+
+	print1(obj1);
+
+	function print2(exam) {
+		let{kor,eng,aa = 9} = exam;
+		console.log("kor:"+kor);
+		console.log("eng:"+eng);
+		console.log(aa);
+		// console.log("total:"+total());
+	}
+
+	print2(obj1);
+	
+
+
+</script>
+</head>
+<body>
+	<!-- <img src="boy.png"> -->
+	<canvas class="game-canvas" width="700" height="600"></canvas>
+</body>
+</html>
