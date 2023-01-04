@@ -1,4 +1,6 @@
-function boy(x,y){
+class boy{
+    constructor(x,y){
+
         this.x = x || 100;
         this.y = y || 100;
         // var dx = 100*arguments[2];
@@ -9,11 +11,14 @@ function boy(x,y){
         this.sx = this.sw*1;
         this.sy = this.sh*2;
         
-}
+        this.dx = 0;
+        this.dy = 0;
+        this.vx = 0;
+        this.vy = 0 ;
+    }
 
-boy.prototype = {
-    draw : function(ctx){
-        img = new Image();
+    draw(ctx){
+        var img = new Image();
         img.src = "boy.png";
         img.onload = function(){
             console.log(this);
@@ -22,24 +27,40 @@ boy.prototype = {
                 this.sx,this.sy,this.sw,this.sh,
                 this.x,this.y,106,148.25);
         }.bind(this);
-    },
-    move : function(dir){
-        switch(dir){
-            case 1:
-                this.y -= 10;
-                break;
-            case 2:
-                this.x += 10;
-                break;
-            case 3:
-                this.y += 10;
-                break;
-            case 4:
-                this.x -= 10;
-                break;
-        }
-    },
-    update: function(){
+    }
+
+    update(){
+        this.x += this.vx;
+        this.y += this.vy;
+    }
+
+    moveTo(dx,dy){
+        let w = dx - this.x;
+        let h = dy - this.y;
+
+        let d = Math.sqrt(w*w+h*h);
+        this.vx = w/d;
+        this.vy = h/d;
 
     }
+
+    move(dir){
+        switch(dir){
+            case 1:
+                this.y -= 1;
+                break;
+            case 2:
+                this.x += 1;
+                break;
+            case 3:
+                this.y += 1;
+                break;
+            case 4:
+                this.x -= 1;
+                break;
+        }
+    }
+
+    
 }
+
