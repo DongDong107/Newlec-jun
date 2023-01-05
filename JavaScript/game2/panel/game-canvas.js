@@ -20,13 +20,14 @@ class GameCanvas{
         // 초당 60프레임 화면을 다시 그리는 코드
         this.update(); //지웠다가 ()
         this.draw(); //다시 그리기
+        
+        console.log("timer start");
+        window.setTimeout(()=>{this.run();},17);
         //window.setTimeout(this.run.bind(this), 1000)
     //     window.setTimeout(function(){
     //         this.run();
     //     })
-        console.log("timer start");
-        window.setTimeout(()=>{this.run();},17);
-
+        
     }
 
     update(){

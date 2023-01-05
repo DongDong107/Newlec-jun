@@ -18,7 +18,7 @@ class boy{
     }
 
     draw(ctx){
-        var img = new Image();
+        let img = new Image();
         img.src = "boy.png";
         img.onload = function(){
             console.log(this);
