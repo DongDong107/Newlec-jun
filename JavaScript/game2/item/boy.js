@@ -8,13 +8,15 @@ class boy{
 
         this.sw = 106;
         this.sh = 148.25;
-        this.sx = this.sw*1;
-        this.sy = this.sh*2;
+        this.ix = 1;
+        this.iy = 2;       
         
         this.dx = 0;
         this.dy = 0;
         this.vx = 0;
         this.vy = 0;
+
+        this.cnt = 0;
 
         this.img = document.querySelector("#boy");
     }
@@ -26,22 +28,50 @@ class boy{
         //     console.log(this);
             
         // }.bind(this);
+        this.sx = this.sw*this.ix;
+        this.sy = this.sh*this.iy;
         ctx.drawImage(this.img,
             this.sx,this.sy,this.sw,this.sh,
             this.x-this.sw/2,this.y-this.sh+15, this.sw, this.sh);
     }
 
     update(){
-        if((this.dx-1 <= this.x && this.x <= this.dx+1) ||
-        (this.dy-1 <= this.y && this.y <= this.dy+1)){
+        if(this.vx==0 && this.vy==0){
+            this.ix = 1;
+            return;                        
+        }            
+        if(this.cnt > 10){
+    
+            if(this.ix == 1){
+                this.ix = 0;
+            }
+            else 
+                this.ix = this.ix == 0 ? 2 : 0;
+                this.cnt = 0;
+                // if(this.ix == 0){
+                //     this.ix = 2;
+                // }
+                // else if(this.ix == 2) {
+                //     this.ix = 0;                
+                // }                
+        }        
+        
+        this.cnt++;
+
+        if((this.dx-0.5 <= this.x && this.x <= this.dx+0.5) ||
+        (this.dy-0.5 <= this.y && this.y <= this.dy+0.5)){
             this.vx = 0;
             this.vy = 0;
+            // this.ix = 1;
+            // this.sx = this.sw*this.ix;                        
         }
         this.x += this.vx;
         this.y += this.vy;
+
     }
 
     moveTo(dx,dy){
+        
         let w = dx - this.x;
         let h = dy - this.y;
 
@@ -56,17 +86,17 @@ class boy{
 
     move(dir){
         switch(dir){
-            case 1:
-                this.y -= 1;
+            case "ArrowUp":
+                this.y -= 10;
                 break;
-            case 2:
-                this.x += 1;
+            case "ArrowRight":
+                this.x += 10;
                 break;
-            case 3:
-                this.y += 1;
+            case "ArrowDown":
+                this.y += 10;
                 break;
-            case 4:
-                this.x -= 1;
+            case "ArrowLeft":
+                this.x -= 10;
                 break;
         }
     }

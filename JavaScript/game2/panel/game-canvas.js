@@ -3,10 +3,12 @@ class GameCanvas{
     constructor(){
         this.dom = document.querySelector(".game-canvas"); // 선택자 . : 뒤 이름의 class 를찾음
         this.boy = new boy(100,100);
+        this.dom.focus();
         this.bg = new Background();
           /** @type {CanvasRenderingContext2D} */
         this.ctx = this.dom.getContext("2d");
         this.dom.onclick = this.clickHandler.bind(this); //콜백함수
+        this.dom.onkeydown = this.keyDownHandler.bind(this);
         
         //게임 상태변수
         this.gameover = false;
@@ -23,7 +25,7 @@ class GameCanvas{
         this.draw(); //다시 그리기
         
         console.log("timer start");
-        window.setTimeout(()=>{this.run();},17);
+        window.setTimeout(()=>{this.run();},1);
         //window.setTimeout(this.run.bind(this), 1000)
     //     window.setTimeout(function(){
     //         this.run();
@@ -51,5 +53,9 @@ class GameCanvas{
         this.boy.moveTo(e.x, e.y);
         // this.boy.move(2);
         // this.boy.draw(this.ctx);   
+    }
+
+    keyDownHandler(e){
+        this.boy.move(e["key"]);
     }
 }
