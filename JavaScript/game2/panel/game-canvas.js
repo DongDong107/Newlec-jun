@@ -3,6 +3,7 @@ class GameCanvas{
     constructor(){
         this.dom = document.querySelector(".game-canvas"); // 선택자 . : 뒤 이름의 class 를찾음
         this.boy = new boy(100,100);
+        this.bg = new Background();
           /** @type {CanvasRenderingContext2D} */
         this.ctx = this.dom.getContext("2d");
         this.dom.onclick = this.clickHandler.bind(this); //콜백함수
@@ -35,6 +36,7 @@ class GameCanvas{
     }    
 
     draw(){
+        this.bg.draw(this.ctx);
         this.boy.draw(this.ctx);
     }
 
