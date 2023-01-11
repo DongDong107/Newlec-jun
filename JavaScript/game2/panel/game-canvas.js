@@ -1,6 +1,7 @@
 import Boy from '../item/boy.js';
 import Background from '../item/back-ground.js';
 import Enemy from '../item/enemy.js';
+import newlec from '../newlec.js';
 
 export default class GameCanvas{
 
@@ -21,6 +22,8 @@ export default class GameCanvas{
         //         this.enemies.splice(index,1);           
 
         //     };
+
+        newlec.enemies = this.enemies;
 
         this.boy.speed++;
 

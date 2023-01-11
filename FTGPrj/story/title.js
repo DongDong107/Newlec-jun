@@ -6,7 +6,7 @@ export default class Title{
     }
 
     draw(ctx){
-        ctx.drawImage(this.img,this.x,this.y);
+        ctx.drawImage(this.img,0,0,1400,700,0,0,1400,700);
     }
 
 

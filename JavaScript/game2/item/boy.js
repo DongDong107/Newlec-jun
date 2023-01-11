@@ -1,3 +1,5 @@
+import newlec from "../newlec.js";
+
 export default class Boy{
     // #vx; (private)
     #speed;
@@ -47,10 +49,30 @@ export default class Boy{
         this.sy = this.sh*this.iy;
         ctx.drawImage(this.img,
             this.sx,this.sy,this.sw,this.sh,
-            this.x-this.sw/2,this.y-this.sh+15, this.sw, this.sh);
-    }
+            this.x-this.sw/2,this.y-this.sh+15, this.sw, this.sh);           
+    } 
 
     update(){
+        for(let enemy of newlec.enemies){
+            let ex = enemy.centerx;
+            let ey = enemy.centery;
+
+            let ry = enemy.enemyr;
+
+            let w = this.x - ex;
+            let h = (this.y-this.sh+15+this.sh/2) - ey;
+            // let w = this.x - ex;
+            // let h = this.y - ey;
+
+            let exgap = ry + this.sh/2;
+            // let exgap = y*2;
+            let curgap = Math.sqrt(w*w+h*h);
+            
+
+            if(exgap >= curgap)
+                console.log("충돌발생");
+        }
+
         // 이동을 위한 코드
         if(this.moveUp)            
             this.y -= this.#speed;

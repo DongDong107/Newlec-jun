@@ -1,5 +1,5 @@
-import GameCanvas from "./panel/game-canvas"
-import StoryCanvas from "./panel/story-canvas";
+import GameCanvas from "./panel/game-canvas.js"
+import StoryCanvas from "./panel/story-canvas.js";
 
 window.addEventListener("load",function(){
        let gameCanvas = new GameCanvas();
