@@ -1,4 +1,4 @@
-export default class Scene1{
+export default class LeaveHomeScene{
     constructor() {
         this.x = 0;
         this.y = 0;
