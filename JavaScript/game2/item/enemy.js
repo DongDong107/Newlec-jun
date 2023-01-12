@@ -15,6 +15,8 @@ export default class Enemy{
         this.eiy = 0;
         this.esw = this.exploImg.width/4;
         this.esh = this.exploImg.height/5;
+
+        this.isChungdol = false;
     }
 
     get centerx(){
@@ -29,6 +31,10 @@ export default class Enemy{
         return this.img.height/2;
     }
 
+    chungdol(){
+    
+        this.isChungdol = true;
+    }
 
     draw(ctx){
 
@@ -36,9 +42,11 @@ export default class Enemy{
         this.esy = this.esh * this.eiy;
 
         ctx.drawImage(this.img,this.x - this.img.width/2,this.y - this.img.height*1.2);
-        ctx.drawImage(this.exploImg,0,0,this.esw,this.esh,
-        this.x-this.esw/2,this.y-this.esh+15,this.esw,this.esh);
-        
+
+        if(this.isChungdol){
+            ctx.drawImage(this.exploImg,0,0,this.esw,this.esh,
+            this.x-this.esw/2,this.y-this.esh+15,this.esw,this.esh);            
+        }
         // this.x-this.sw/2,this.y-this.sh+15
         
     }
@@ -50,5 +58,7 @@ export default class Enemy{
             if(this.onOutOfScreen != null)
                 this.onOutOfScreen(this);
     }
+
+
 
 }

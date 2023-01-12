@@ -40,9 +40,9 @@ export default class StoryCanvas {
         this.scenes[this.page].draw(this.ctx);      
     }
 
-    이벤트
+    //이벤트
     onclickhandler(e) {
-
+        
     }
 
     backbtnclickhandler(e) {

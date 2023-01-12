@@ -27,6 +27,8 @@ export default class Boy{
         this.moveUp = false;
         this.moveDown = false;        
 
+        
+
         this.img = document.querySelector("#boy");
     }
 
@@ -69,8 +71,13 @@ export default class Boy{
             let curgap = Math.sqrt(w*w+h*h);
             
 
-            if(exgap >= curgap)
+            if(exgap >= curgap){
+                enemy.chungdol();
                 console.log("충돌발생");
+                //위임 받아 놓은 함수 (callback) 를 호출한다.
+                if(this.onNoLife)
+                    this.onNoLife();
+            }
         }
 
         // 이동을 위한 코드

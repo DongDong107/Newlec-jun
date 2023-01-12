@@ -2,14 +2,22 @@ import Boy from '../item/boy.js';
 import Background from '../item/back-ground.js';
 import Enemy from '../item/enemy.js';
 import newlec from '../newlec.js';
+import ConfirmDlg from '../item/confirmdlg.js';
 
 export default class GameCanvas{
 
     constructor(){
         this.dom = document.querySelector(".game-canvas"); // 선택자 . : 뒤 이름의 class 를찾음
         this.boy = new Boy(100,100);
+        this.boy.onNoLife = this.boyNoLifeHandler.bind(this);
         this.dom.focus();
         this.bg = new Background();
+
+        this.dlg = new ConfirmDlg();
+        this.dlg.onclick = ()=>{
+            console.log("clicked");
+        };
+        this.dlg.show();
         this.enemies = [];
 
           /** @type {CanvasRenderingContext2D} */
@@ -67,6 +75,8 @@ export default class GameCanvas{
             
         for(let enemy of this.enemies)
             enemy.update();
+
+        this.dlg.show();
         if(this.enDelay == 0)
         {
             let getRandomInt = (min, max) =>{
@@ -95,6 +105,7 @@ export default class GameCanvas{
         for(let enemy of this.enemies)
             enemy.draw(this.ctx);
         this.boy.draw(this.ctx);
+        this.dlg.draw(this.ctx);
 
     }
 
@@ -106,6 +117,9 @@ export default class GameCanvas{
     
     clickHandler(e){
         
+        
+        this.dlg.notifyClick(e.x, e.y);
+
         this.boy.moveTo(e.x, e.y);
         // this.boy.move(2);
         // this.boy.draw(this.ctx);   
@@ -119,6 +133,10 @@ export default class GameCanvas{
     keyUpHandler(e){
         // this.boy.kreset();
         this.boy.stop(e.key);            
+    }
+
+    boyNoLifeHandler(){
+        console.log("소년의 생명이 없습니다.");
     }
 
     // 적이 스크린밖으로 나갔을때 실행해야할 함수.
