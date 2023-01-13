@@ -145,7 +145,6 @@ export default class GameCanvas{
     //     this.enemies.splice(index,1);
     // }
 
-
 }
 
 // export default GameCanvas;

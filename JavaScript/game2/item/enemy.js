@@ -16,6 +16,8 @@ export default class Enemy{
         this.esw = this.exploImg.width/4;
         this.esh = this.exploImg.height/5;
 
+        this.expOrder = 0;
+
         this.isChungdol = false;
     }
 
@@ -44,8 +46,10 @@ export default class Enemy{
         ctx.drawImage(this.img,this.x - this.img.width/2,this.y - this.img.height*1.2);
 
         if(this.isChungdol){
-            ctx.drawImage(this.exploImg,0,0,this.esw,this.esh,
+
+            ctx.drawImage(this.exploImg,this.esx,this.esy,this.esw,this.esh,
             this.x-this.esw/2,this.y-this.esh+15,this.esw,this.esh);            
+            this.expOrder++;
         }
         // this.x-this.sw/2,this.y-this.sh+15
         
@@ -53,9 +57,18 @@ export default class Enemy{
 
     update(){
         this.y += this.speed;
+        
+        this.eiy = Math.floor(this.expOrder / 4);
+        this.eix = this.expOrder % 4;
+
+        // if(this.expOrder == 18)
+        //     this.expOrder = 0;
 
         if(this.y > 450)
             if(this.onOutOfScreen != null)
+                this.onOutOfScreen(this);
+
+        if(this.isChungdol && this.expOrder == 18 && this.onOutOfScreen != null)
                 this.onOutOfScreen(this);
     }
 

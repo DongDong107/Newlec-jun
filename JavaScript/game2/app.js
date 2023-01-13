@@ -1,5 +1,5 @@
-import GameCanvas from "./panel/game-canvas";
-import RankCanvas from "./panel/rank-canvas";
+import GameCanvas from "./panel/game-canvas.js";
+import RankCanvas from "./panel/rank-canvas.js";
 import newlec from './newlec.js';
 
 window.addEventListener("load", function(){                          
