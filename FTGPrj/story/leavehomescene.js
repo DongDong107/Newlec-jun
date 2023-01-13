@@ -9,5 +9,9 @@ export default class LeaveHomeScene{
         ctx.drawImage(this.img,0,0,1400,700,0,0,1400,700);
     }
 
+    update() {
+        
+    }
+
 
 }
