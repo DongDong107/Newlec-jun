@@ -15,10 +15,7 @@ export default class StoryCanvas {
         this.scenes = [this.title, this.s1, this.s2, this.s3];
         this.page = 0;
         
-        this.backBtn = document.querySelector("#backbtn");
-        this.backBtn.onclick = this.backbtnclickhandler.bind(this);
-        this.forwardBtn = document.querySelector("#forwardbtn");
-        this.forwardBtn.onclick = this.forwardbtnclickhandler.bind(this);
+        
 
         this.dom.onclick = this.onclickhandler.bind(this);
 

@@ -8,7 +8,7 @@ export default class Title{
 
     draw(ctx){
         ctx.drawImage(this.img,0,0,1400,700,0,0,1400,700);
-        ctx.play(this.audio);
+        // ctx.play(this.audio);
     }
 
 
