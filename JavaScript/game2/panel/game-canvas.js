@@ -10,14 +10,14 @@ export default class GameCanvas{
         this.dom = document.querySelector(".game-canvas"); // 선택자 . : 뒤 이름의 class 를찾음
         this.boy = new Boy(100,100);
         this.boy.onNoLife = this.boyNoLifeHandler.bind(this);
+
         this.dom.focus();
         this.bg = new Background();
 
         this.dlg = new ConfirmDlg();
-        this.dlg.onclick = ()=>{
-            console.log("clicked");
-        };
-        this.dlg.show();
+        this.dlg.onclick = this.dlgClickHandler.bind(this);
+        
+        
         this.enemies = [];
 
           /** @type {CanvasRenderingContext2D} */
@@ -35,9 +35,14 @@ export default class GameCanvas{
 
         this.boy.speed++;
 
+        // 내가 정의한 이벤트
+        this.ongameOver = null;
+
+        // 내가 처리할 이벤트
         this.dom.onclick = this.clickHandler.bind(this); //콜백함수
         this.dom.onkeydown = this.keyDownHandler.bind(this);
         this.dom.onkeyup = this.keyUpHandler.bind(this);
+
         
         // 여기서 정의 하던지.
         this.enemyOutOfScreenHandler = function(en) {
@@ -76,7 +81,7 @@ export default class GameCanvas{
         for(let enemy of this.enemies)
             enemy.update();
 
-        this.dlg.show();
+        
         if(this.enDelay == 0)
         {
             let getRandomInt = (min, max) =>{
@@ -115,11 +120,8 @@ export default class GameCanvas{
 
     // ----- event -----
     
-    clickHandler(e){
-        
-        
+    clickHandler(e){       
         this.dlg.notifyClick(e.x, e.y);
-
         this.boy.moveTo(e.x, e.y);
         // this.boy.move(2);
         // this.boy.draw(this.ctx);   
@@ -136,7 +138,13 @@ export default class GameCanvas{
     }
 
     boyNoLifeHandler(){
+        this.dlg.show();
         console.log("소년의 생명이 없습니다.");
+    }
+
+    dlgClickHandler(id){
+        if(this.ongameOver) // app이 게임이 끝나면 할 일이 있다고 했나?
+            this.ongameOver(); // 끝낫다.고 알림.
     }
 
     // 적이 스크린밖으로 나갔을때 실행해야할 함수.

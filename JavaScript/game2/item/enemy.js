@@ -30,7 +30,7 @@ export default class Enemy{
     }
 
     get enemyr(){
-        return this.img.height/2;
+        return this.img.width/2;
     }
 
     chungdol(){

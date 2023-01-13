@@ -28,6 +28,7 @@ export default class Boy{
         this.moveDown = false;        
 
         
+        this.noLife = false;        
 
         this.img = document.querySelector("#boy");
     }
@@ -66,7 +67,7 @@ export default class Boy{
             // let w = this.x - ex;
             // let h = this.y - ey;
 
-            let exgap = ry + this.sh/2;
+            let exgap = ry + this.sw/2;
             // let exgap = y*2;
             let curgap = Math.sqrt(w*w+h*h);
             
@@ -75,8 +76,9 @@ export default class Boy{
                 enemy.chungdol();
                 console.log("충돌발생");
                 //위임 받아 놓은 함수 (callback) 를 호출한다.
-                if(this.onNoLife)
+                if(this.onNoLife && !this.noLife)
                     this.onNoLife();
+                    this.noLife = true;
             }
         }
 
