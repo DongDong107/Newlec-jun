@@ -26,8 +26,7 @@ export default class StoryCanvas {
     run() {
 
         this.update();
-        this.draw();
-        
+        this.draw();       
         
         window.setTimeout(() => { this.run(); }, 17);
     }
