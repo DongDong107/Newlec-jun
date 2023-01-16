@@ -1,7 +1,5 @@
-import FirstPigMakeHomeScene from "../story/firstpigmakehomescene.js";
-import LeaveHomeScene from "../story/leavehomescene.js";
-import SeconePigMakeHomeScene from "../story/secondpigmakehomescene.js";
-import Title from "../story/title.js";
+import LeaveHomeScene from "../story/s1-leavehomescene.js";
+import Title from "../story/s0-title.js";
 
 export default class StoryCanvas {
     constructor() {
@@ -9,15 +7,11 @@ export default class StoryCanvas {
         this.ctx = this.dom.getContext("2d");
 
         this.title = new Title();
-        this.s1 = new LeaveHomeScene();
-        this.s2 = new FirstPigMakeHomeScene();
-        this.s3 = new SeconePigMakeHomeScene();
-
-        
-        this.scenes = [this.title, this.s1, this.s2, this.s3];
+        this.s1 = new LeaveHomeScene();       
+        this.scenes = [this.title, this.s1];
         this.page = 0;
         
-
+        // 마우스 클릭, 이동 관련 이벤트 넣어주기 위해서 
         this.dom.onmousemove = this.onmousemovehandler.bind(this);
         this.dom.onclick = this.onclickhandler.bind(this);
 
@@ -42,24 +36,32 @@ export default class StoryCanvas {
     }
 
     //이벤트
+
+    // 클릭 위치 찍기
     onclickhandler(e) {
         console.log(e);
         this.scenes[this.page].notifyClick(e.x,e.y);
     }
 
+    // 마우스 이동 좌표 찍기
     onmousemovehandler(e){
         console.log(e.x,e.y);
         this.scenes[this.page].notifyMove(e.x, e.y);
     }
 
+    // 뒤로 가기 버튼이 있는 좌표 눌럿을 때
     backbtnclickhandler(e) {
+        if(this.scenes[this.page].backbtnclicked){
+            if (this.page === 0)
+                return;
+            else
+                this.page--;
+        }
 
-        if (this.page === 0)
-            return;
-        else
-            this.page--;
+        this.scenes[this.page].backbtnclicked = false;
     }
 
+    // 앞으로 가기 버튼이 있는 좌표 눌럿을 때
     forwardbtnclickhandler() {
         if(this.scenes[this.page].fwdbtnclicked){
 
@@ -68,7 +70,7 @@ export default class StoryCanvas {
             else
                 this.page++;
         }
-        // console.log(this.page);
+        
         this.scenes[this.page].fwdbtnclicked = false;
     }
 

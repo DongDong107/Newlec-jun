@@ -5,6 +5,9 @@ export default class Title{
 
         this.onclickx = null;
         this.onclicky = null;
+
+        this.onmovex = null;
+        this.onmovey = null;
         this.fwdbtnclicked = false;
         
         // this.img = document.querySelector("#title");
@@ -16,10 +19,20 @@ export default class Title{
         this.fwdhoverbtn = document.querySelector("#fwdhoverbtn");
         this.pausebtn = document.querySelector("#pausebtn");
 
+        this.backbtnclicked = false;
+    this.backbtnx = 0;
+    this.backbtny = 0;
+        this.backBtn = document.querySelector("#backbtn");
+        this.backHoverBtn = document.querySelector("#backhoverbtn");
+
         this.audio = new Audio();
-        this.audio.src = "../audio/testaudio1.mp3";        
+        this.audio.src = "../audio/sound/title.mp3";        
         this.audio.loop = false;              
         
+        
+        this.light = 0.0;
+        this.lightspeed = 0.01;
+
         this.fwdbtnx = 1300;
         this.fwdbtny = 0;
     }
@@ -29,6 +42,12 @@ export default class Title{
         
         ctx.drawImage(this.img,0,0,1400,700,0,0,1400,700);
         ctx.drawImage(this.pausebtn, 0, 0, this.pausebtn.width, this.pausebtn.height, 750, 650, 50, 50);        
+
+        if((this.backbtnx < this.onmovex && this.onmovex < 100) && (this.backbtny <this.onmovey && this.onmovey < 100)) {
+            ctx.drawImage(this.backHoverBtn, 0,0,this.backHoverBtn.width, this.backHoverBtn.height,this.backbtnx, this.backbtny, 100, 100);
+        }
+        else
+            ctx.drawImage(this.backBtn, 0,0,this.backBtn.width, this.backBtn.height,this.backbtnx, this.backbtny, 100, 100);
         
         if((this.fwdbtnx<this.onmovex && this.onmovex < 1400) && (this.fwdbtny<this.onmovey && this.onmovey < 100)) {
             ctx.drawImage(this.fwdhoverbtn, 0,0,this.fwdhoverbtn.width, this.fwdhoverbtn.height,this.fwdbtnx, this.fwdbtny, 100, 100);
@@ -36,6 +55,8 @@ export default class Title{
         else
             ctx.drawImage(this.forwardbtn, 0,0,this.forwardbtn.width, this.forwardbtn.height,this.fwdbtnx, this.fwdbtny, 100, 100);    
         
+        
+        this.drawtxt(ctx);
     }
 
     update() {
@@ -51,8 +72,26 @@ export default class Title{
         }
 
         this.onclickx = null;
-        this.onclicky = null;        
+        this.onclicky = null;  
+        
+        if(this.light < 1.0)
+            this.light += this.lightspeed;
+        
 
+    }
+
+    fontinit(ctx) {
+        ctx.font = '30pt';        
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'middle';
+    }
+
+    drawtxt(ctx) {
+        ctx.font = '30pt Jua';         
+        ctx.fillStyle = `rgba(0,0,0,${this.light})`;     
+        ctx.fillText('아기 돼지 삼형제가 살았어요.', 500, 70);        
+        ctx.fillText('하루는 엄마 돼지가 말했어요', 500, 110);        
+        ctx.fillText('얘들아, 이제 너희는 다 컸단다.', 500, 150);
     }
 
     notifyClick(x,y) {
