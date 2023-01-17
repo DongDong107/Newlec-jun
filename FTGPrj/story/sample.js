@@ -6,6 +6,7 @@ export default class Sample{
     // (만약에 로드가 늦어져서 드로우가 안되는 현상이 반복되면 html에서 불러올 계획.)
     // this.img = document.querySelector("??"); 이런식으로
 
+
     // 버튼 이미지 불러오기
     this.backBtn = document.querySelector("#backbtn");
     this.backHoverBtn = document.querySelector("#backhoverbtn");
@@ -14,6 +15,14 @@ export default class Sample{
     this.playBtn = document.querySelector("#playbtn");
     this.pauseBtn = document.querySelector("#pausebtn");
     this.replayBtn = document.querySelector("#replaybtn");
+
+    // this.canvas = document.querySelector(".story-canvas");
+    // this.canvasWidth = canvas.width;
+    // this.canvasHeight = canvas.height;
+    this.canvas = document.querySelector(".story-canvas");
+    this.canvasWidth = this.canvas.width;
+    this.canvasHeight = this.canvas.height;
+    
     
     
     // 뒤로 가기 버튼 (1.클릭이 되었는지 2.버튼 이미지의 x,y좌표)
@@ -50,7 +59,7 @@ export default class Sample{
     this.subtitleX = 500;
     this.subtitleY = 100; /** 자막 위치 */
     this.lineInterval = 40; /** 자막 간격 */
-    this.subtitleTxt = ['샘플 확인용'];
+    this.subtitleTxt = ['샘플 확인용']; /*여기다가 멘트들 한줄씩 넣으면 됨*/
     
     // story-canvas 에서 받아오는 클릭된 x,y 좌표 값 저장
     this.onclickx = null;
@@ -63,8 +72,8 @@ export default class Sample{
 
   draw(ctx){
     // 이미지 그리기
-    ctx.drawImage(this.img, 0, 0, this.img.width, this.img.height, 0, 0, ctx.width, ctx.height);
-
+    ctx.drawImage(this.img, 0, 0, this.img.width, this.img.height, 0, 0, this.canvasWidth, this.canvasHeight);
+   
     // 뒤로 가기 버튼 그리기
     if((this.backbtnx < this.onmovex && this.onmovex < 100) && (this.backbtny < this.onmovey && this.onmovey < 100)) {
       ctx.drawImage(this.backHoverBtn, 0, 0,this.backHoverBtn.width, this.backHoverBtn.height,this.backbtnx, this.backbtny, this.dirBtnSz, this.dirBtnSz);
@@ -93,11 +102,17 @@ export default class Sample{
   
   update() {
     if((this.backbtnx < this.onclickx && this.onclickx < 100) && (this.backbtny < this.onclicky && this.onclicky < 100)) {
-      this.backbtnclicked = true;
+      this.backbtnclicked = true;     
+      this.fontlight = 0.0; /* 자막 밝기 초기화*/
+      this.audio.pause();
+      this.audio.currentTime = 0; /*오디오 초기화(멈추고 플레이시간 처음으로 돌려놓음)*/
     }
     
     if((this.fwdbtnx<this.onclickx && this.onclickx < 1400) && (this.fwdbtny<this.onclicky && this.onclicky < 100)) {
       this.fwdbtnclicked = true;
+      this.fontlight = 0.0;
+      this.audio.pause();
+      this.audio.currentTime = 0;
     }
     
     // 해당 버튼에 마우스 클릭 시에 재생, 일시정지, 처음부터 다시 재생
@@ -127,6 +142,7 @@ export default class Sample{
 // 자막 그리는 함수
 printSubtitle(ctx) {
   
+
   for(let i=0; i<this.subtitleTxt.length; i++){
     ctx.font = '30pt Jua';
     ctx.fillStyle = `rgba(0,0,0,${this.fontlight})`; 

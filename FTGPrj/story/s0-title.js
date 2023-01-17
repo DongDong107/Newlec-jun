@@ -41,7 +41,7 @@ export default class Title{
         
         
         ctx.drawImage(this.img,0,0,1400,700,0,0,1400,700);
-        ctx.drawImage(this.pausebtn, 0, 0, this.pausebtn.width, this.pausebtn.height, 750, 650, 50, 50);        
+        // ctx.drawImage(this.pausebtn, 0, 0, this.pausebtn.width, this.pausebtn.height, 750, 650, 50, 50);        
 
         if((this.backbtnx < this.onmovex && this.onmovex < 100) && (this.backbtny <this.onmovey && this.onmovey < 100)) {
             ctx.drawImage(this.backHoverBtn, 0,0,this.backHoverBtn.width, this.backHoverBtn.height,this.backbtnx, this.backbtny, 100, 100);

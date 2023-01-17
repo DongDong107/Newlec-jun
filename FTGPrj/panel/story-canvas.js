@@ -7,10 +7,12 @@ export default class StoryCanvas {
         this.dom = document.querySelector(".story-canvas");
         this.ctx = this.dom.getContext("2d");
 
+
+
         this.title = new Title();
         this.s1 = new LeaveHomeScene();      
         this.sample = new Sample();
-        this.scenes = [this.title, this.sample, this.s1];
+        this.scenes = [new Title(), new Sample(), new LeaveHomeScene()];
         this.page = 0;
         
         // 마우스 클릭, 이동 관련 이벤트 넣어주기 위해서 
@@ -43,6 +45,7 @@ export default class StoryCanvas {
     }
 
     draw() {
+        
         this.scenes[this.page].draw(this.ctx);      
     }
 
@@ -50,13 +53,13 @@ export default class StoryCanvas {
 
     // 클릭 위치 찍기
     onclickhandler(e) {
-        console.log(e);
+        // console.log(e);
         this.scenes[this.page].notifyClick(e.x,e.y);
     }
 
     // 마우스 이동 좌표 찍기
     onmousemovehandler(e){
-        console.log(e.x,e.y);
+        // console.log(e.x,e.y);
         this.scenes[this.page].notifyMove(e.x, e.y);
     }
 
@@ -66,21 +69,21 @@ export default class StoryCanvas {
         
             if (this.page === 0)
                 return;
-            else
+            else{                
                 this.page -= 1;        
+            }
     }
 
     // 앞으로 가기 버튼이 있는 좌표 눌럿을 때
     forwardbtnclickhandler() {
         if (this.page === this.scenes.length - 1)
             return;
-        else
+        else{            
             this.page++;        
+        }
     }
 
-    screenInit() {
-        this.scenes[this.page].audio.
-    }
+    
 
 
 }
