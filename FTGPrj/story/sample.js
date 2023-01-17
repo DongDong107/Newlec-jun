@@ -59,7 +59,7 @@ export default class Sample{
     this.subtitleX = 500;
     this.subtitleY = 100; /** 자막 위치 */
     this.lineInterval = 40; /** 자막 간격 */
-    this.subtitleTxt = ['샘플 확인용']; /*여기다가 멘트들 한줄씩 넣으면 됨*/
+    this.subtitleTxt = ['샘플 확인용','나는짱']; /*여기다가 멘트들 한줄씩 넣으면 됨*/
     
     // story-canvas 에서 받아오는 클릭된 x,y 좌표 값 저장
     this.onclickx = null;

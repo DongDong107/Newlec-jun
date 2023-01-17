@@ -1,18 +1,26 @@
+import Title from "../story/s0-title.js"
 import LeaveHomeScene from "../story/s1-leavehomescene.js";
-import Title from "../story/s0-title.js";
+import Pig1home from "../story/s2-pig1home.js";
+import Pig2home from "../story/s3-pig2home.js";
+import Pig3home from "../story/s4-pig3home.js";
+import WolfAppear from "../story/s5-wolfAppear.js";
+import Wolfpig1talk from "../story/s6-wolfpig1talk.js";
+import Pig1homegone from "../story/s7-pig1homegone.js";
+import Pig2HomeGone from "../story/s8-pig2homegone.js";
+import WolfPig3Talk from "../story/s9-wolfpig3talk.js";
+import Pig3HomeAlive from "../story/s10-pig3homealive.js";
+import WolpAngry from "../story/s11-wolfangry.js";
+import WolfFire from "../story/s12-wolffire.js";
+import Ending from "../story/s13-ending.js";
 import Sample from "../story/sample.js";
 
 export default class StoryCanvas {
     constructor() {
         this.dom = document.querySelector(".story-canvas");
         this.ctx = this.dom.getContext("2d");
-
-
-
-        this.title = new Title();
-        this.s1 = new LeaveHomeScene();      
-        this.sample = new Sample();
-        this.scenes = [new Title(), new Sample(), new LeaveHomeScene()];
+    
+        this.scenes = [new Title(), new LeaveHomeScene(), new Pig1home(), new Pig2home(), new Pig3home(), new WolfAppear(), new Wolfpig1talk(),
+            new Pig1homegone(), new Pig2HomeGone(), new WolfPig3Talk(), new Pig3HomeAlive(), new WolpAngry(), new WolfFire(), new Ending()];
         this.page = 0;
         
         // 마우스 클릭, 이동 관련 이벤트 넣어주기 위해서 
