@@ -56,7 +56,7 @@ export default class Title{
             ctx.drawImage(this.forwardbtn, 0,0,this.forwardbtn.width, this.forwardbtn.height,this.fwdbtnx, this.fwdbtny, 100, 100);    
         
         
-        this.drawtxt(ctx);
+        // this.drawtxt(ctx);
     }
 
     update() {

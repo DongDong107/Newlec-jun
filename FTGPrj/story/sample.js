@@ -20,7 +20,7 @@ export default class Sample{
     this.backbtnclicked = false;
     this.backbtnx = 0;
     this.backbtny = 0;
-    this.dirBtnSz = 100;
+    this.dirBtnSz = 100; /*방향버튼사이즈 줄임*/
     
     // 앞으로 가기 버튼 
     this.fwdbtnclicked = false;
@@ -28,11 +28,11 @@ export default class Sample{
     this.fwdbtny = 0;
 
     // 재생 관련 버튼
-    this.playBtnX = 650;
+    this.playBtnX = 600;
     this.pauseBtnX = 700;
-    this.replayBtnX = 750;
-    this.playBtnY = 650;
-    this.playBtnSz = 50;
+    this.replayBtnX = 800;
+    this.playBtnY = 630;
+    this.playBtnSz = 70;
     
     // 장면 이미지 파일 불러오기 (src 임시)
     this.img = new Image();
@@ -42,12 +42,16 @@ export default class Sample{
     this.audio = new Audio();
     this.audio.src = "../audio/sound/title.mp3";
     this.audio.loop = false; 
+    this.audioCount = 0;
 
     // 자막 관련
     this.fontlight = 0.0;
-    this.fontlightspeed = 0.01;
-
-
+    this.fontlightspeed = 0.005; /* 글자 밝기 0.0 ~ 1.0 */ 
+    this.subtitleX = 500;
+    this.subtitleY = 100; /** 자막 위치 */
+    this.lineInterval = 40; /** 자막 간격 */
+    this.subtitleTxt = ['샘플 확인용'];
+    
     // story-canvas 에서 받아오는 클릭된 x,y 좌표 값 저장
     this.onclickx = null;
     this.onclicky = null;
@@ -59,45 +63,76 @@ export default class Sample{
 
   draw(ctx){
     // 이미지 그리기
-    ctx.drawImage(this.img, ~~~~~~);
+    ctx.drawImage(this.img, 0, 0, this.img.width, this.img.height, 0, 0, ctx.width, ctx.height);
 
     // 뒤로 가기 버튼 그리기
-    if((this.backbtnx < this.onmovex && this.onmovex < 100) && (this.backbtny <this.onmovey && this.onmovey < 100)) {
-      ctx.drawImage(this.backHoverBtn, 0,0,this.backHoverBtn.width, this.backHoverBtn.height,this.backbtnx, this.backbtny, this.dirBtnSz, this.dirBtnSz);
+    if((this.backbtnx < this.onmovex && this.onmovex < 100) && (this.backbtny < this.onmovey && this.onmovey < 100)) {
+      ctx.drawImage(this.backHoverBtn, 0, 0,this.backHoverBtn.width, this.backHoverBtn.height,this.backbtnx, this.backbtny, this.dirBtnSz, this.dirBtnSz);
     }
     else
-    ctx.drawImage(this.backBtn, 0,0,this.backBtn.width, this.backBtn.height,this.backbtnx, this.backbtny, this.dirBtnSz, this.dirBtnSz);
+      ctx.drawImage(this.backBtn, 0,0,this.backBtn.width, this.backBtn.height,this.backbtnx, this.backbtny, this.dirBtnSz, this.dirBtnSz);
     
     // 앞으로 가기 버튼 그리기
     if((this.fwdbtnx<this.onmovex && this.onmovex < 1400) && (this.fwdbtny<this.onmovey && this.onmovey < 100)) {
-      ctx.drawImage(this.fwdhoverbtn, 0,0,this.fwdhoverbtn.width, this.fwdhoverbtn.height,this.fwdbtnx, this.fwdbtny, this.dirBtnSz, this.dirBtnSz);
+      ctx.drawImage(this.fwdHoverBtn, 0, 0, this.fwdHoverBtn.width, this.fwdHoverBtn.height, this.fwdbtnx, this.fwdbtny, this.dirBtnSz, this.dirBtnSz);
     }
     else
-      ctx.drawImage(this.forwardBtn, 0,0,this.forwardBtn.width, this.forwardBtn.height,this.fwdbtnx, this.fwdbtny, this.dirBtnSz, this.dirBtnSz);    
+      ctx.drawImage(this.forwardBtn, 0, 0, this.forwardBtn.width, this.forwardBtn.height,this.fwdbtnx, this.fwdbtny, this.dirBtnSz, this.dirBtnSz);    
     
-    // 재생 관련 버튼 그리기 (재생, 일시정지, 다시재생)
+    // 재생 관련 버튼 그리기 (재생, 일시정지, 다시 재생)
     ctx.drawImage(this.playBtn, 0, 0, this.playBtn.width, this.playBtn.height, this.playBtnX, this.playBtnY, this.playBtnSz, this.playBtnSz);
     ctx.drawImage(this.pauseBtn, 0, 0, this.pauseBtn.width, this.pauseBtn.height, this.pauseBtnX, this.playBtnY, this.playBtnSz, this.playBtnSz);
     ctx.drawImage(this.replayBtn, 0, 0, this.replayBtn.width, this.replayBtn.height, this.replayBtnX, this.playBtnY, this.playBtnSz, this.playBtnSz);
-
-}
-
-update() {
+    
+    
+    // 자막 그리기
+    this.printSubtitle(ctx);
+    
+    
+  }
+  
+  update() {
     if((this.backbtnx < this.onclickx && this.onclickx < 100) && (this.backbtny < this.onclicky && this.onclicky < 100)) {
       this.backbtnclicked = true;
     }
-
+    
     if((this.fwdbtnx<this.onclickx && this.onclickx < 1400) && (this.fwdbtny<this.onclicky && this.onclicky < 100)) {
-        this.fwdbtnclicked = true;
+      this.fwdbtnclicked = true;
+    }
+    
+    // 해당 버튼에 마우스 클릭 시에 재생, 일시정지, 처음부터 다시 재생
+    if((this.playBtnX < this.onclickx && this.onclickx < this.pauseBtnX) && (this.playBtnY < this.onclicky && this.onclicky < 700)) {
+        this.audio.play();            
+    }
+    
+    if((this.pauseBtnX < this.onclickx && this.onclickx < this.replayBtnX) && (this.playBtnY < this.onclicky && this.onclicky < 700)) {
+        this.audio.pause();
+    }
+  
+    if((this.replayBtnX < this.onclickx && this.onclickx < this.replayBtnX + 100) && (this.playBtnY <this.onclicky && this.onclicky < 700)) {
+      this.audio.currentTime = 0;
+      this.audio.play();
     }
 
     this.onclickx = null;
     this.onclicky = null;
 
+    if(this.fontlight < 1)
+      this.fontlight += this.fontlightspeed;
+      
+    this.audioCount++;
+    
 }
 
-printSubtitle() {
-
+// 자막 그리는 함수
+printSubtitle(ctx) {
+  
+  for(let i=0; i<this.subtitleTxt.length; i++){
+    ctx.font = '30pt Jua';
+    ctx.fillStyle = `rgba(0,0,0,${this.fontlight})`; 
+    ctx.fillText(this.subtitleTxt[i], this.subtitleX, this.subtitleY + this.lineInterval * i);
+  }
+  
 }
 
 // story-canvas에서 콜백함수통해서 x,y 좌표 설정해주는 메소드

@@ -13,7 +13,8 @@ export default class LeaveHomeScene{
 
     draw(ctx){
         ctx.drawImage(this.img,0,0,1400,700,0,0,1400,700);
-        this.audio.play();
+        if(!this.audio.ended)
+            this.audio.play();
     }
 
     update() {

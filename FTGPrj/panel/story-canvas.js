@@ -1,5 +1,6 @@
 import LeaveHomeScene from "../story/s1-leavehomescene.js";
 import Title from "../story/s0-title.js";
+import Sample from "../story/sample.js";
 
 export default class StoryCanvas {
     constructor() {
@@ -7,8 +8,9 @@ export default class StoryCanvas {
         this.ctx = this.dom.getContext("2d");
 
         this.title = new Title();
-        this.s1 = new LeaveHomeScene();       
-        this.scenes = [this.title, this.s1];
+        this.s1 = new LeaveHomeScene();      
+        this.sample = new Sample();
+        this.scenes = [this.title, this.sample, this.s1];
         this.page = 0;
         
         // 마우스 클릭, 이동 관련 이벤트 넣어주기 위해서 
@@ -27,8 +29,17 @@ export default class StoryCanvas {
     
     update() {
         this.scenes[this.page].update();
-        
-        this.forwardbtnclickhandler();
+        if(this.scenes[this.page].backbtnclicked){
+            this.scenes[this.page].backbtnclicked = false;
+            this.backbtnclickhandler();
+            return;
+        }
+        else if(this.scenes[this.page].fwdbtnclicked){
+            this.scenes[this.page].fwdbtnclicked = false;
+            this.forwardbtnclickhandler();
+            return;
+        }
+        console.log(this.page);
     }
 
     draw() {
@@ -50,28 +61,25 @@ export default class StoryCanvas {
     }
 
     // 뒤로 가기 버튼이 있는 좌표 눌럿을 때
-    backbtnclickhandler(e) {
-        if(this.scenes[this.page].backbtnclicked){
+    backbtnclickhandler() {
+        console.log(this.scenes[this.page].backbtnclicked);
+        
             if (this.page === 0)
                 return;
             else
-                this.page--;
-        }
-
-        this.scenes[this.page].backbtnclicked = false;
+                this.page -= 1;        
     }
 
     // 앞으로 가기 버튼이 있는 좌표 눌럿을 때
     forwardbtnclickhandler() {
-        if(this.scenes[this.page].fwdbtnclicked){
+        if (this.page === this.scenes.length - 1)
+            return;
+        else
+            this.page++;        
+    }
 
-            if (this.page === this.scenes.length - 1)
-                return;
-            else
-                this.page++;
-        }
-        
-        this.scenes[this.page].fwdbtnclicked = false;
+    screenInit() {
+        this.scenes[this.page].audio.
     }
 
 
