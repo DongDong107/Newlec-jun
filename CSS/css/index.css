@@ -1,18 +1,16 @@
 @import url(style.css);
-h1,
-h2{
-  color:green;
+
+.header{
+  height: 50px;
+  background-color: aqua;
 }
 
-h1,
-h2.soft{
-  color:brown;
+.cafe{
+  height: 480px;
+  background-color: antiquewhite;
 }
 
-h2#subtitle{
-  color:aquamarine;
-}
-
-h1[lang="ko"]{
-  color:blue;
+.rland{
+  height: 530px;
+  background-color: greenyellow;
 }
