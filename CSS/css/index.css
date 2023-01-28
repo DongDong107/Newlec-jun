@@ -1,0 +1,18 @@
+@import url(style.css);
+h1,
+h2{
+  color:green;
+}
+
+h1,
+h2.soft{
+  color:brown;
+}
+
+h2#subtitle{
+  color:aquamarine;
+}
+
+h1[lang="ko"]{
+  color:blue;
+}
