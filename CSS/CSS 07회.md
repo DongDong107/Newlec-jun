@@ -126,16 +126,119 @@ body {
 }
 ```
 
-60 20
-61 28
-62 21
-63 12
-64 26
-65 28
-66 8
-67 11
-68 13
-69 33
-70 41
-71 23
-72 12
+## 65강 줄 이름으로 아이템 배치하기
+
+1. 영역이름이 아닌 라인 이름을 정할 수 있다.
+
+```css
+body {
+  display: grid;
+  grid-template-columns: [aside-start] 250px [main-start] 1fr;
+}
+```
+
+2. 선 하나에 이름이 2개일 수도 있다.
+
+- [aside-end main-start]
+
+3. 영역 이름이 부여되면 묵시적으로 라인 이름이 붙는다.
+
+4. Alignment Control
+
+- row, 수평 : justify
+- 수직, block : align
+
+- place: align justify
+
+## 66강 multiple column layout
+
+- 텍스트 단 나누기
+- column-count: 3; : 단 수
+- column-gap: 10px; : 단 사이 간격
+- column-rule: 2px solid; : 단 선 표시, 스타일링
+- 더 필요한 기능들은 mdn 찾아보기
+
+## 67강 CSS3를 이용한 트랜지션
+
+- 애니메이션
+- css 트랜지션, 애니메이션, JS의 협업이 필요
+- 트랜지션 : 시간을 지정해주고 그 시간동안 동작하도록
+- 코드 자체는 단순하다.
+
+```css
+body {
+  transition: 1s;
+}
+```
+
+## 68강 CSS3에서 확장된 변형 속성 1
+
+- www.css3maker.com/
+
+1. Transform
+
+- Scale
+- Translate
+- 위의 두 속성은 전에도 구현이 가능했지만, 초기값을 구현해야 하는 불편함, 다른 속성과 엘리먼트에 영향을 주는 문제가 있었다.
+- Rotation
+- Skew
+- 위의 두 속성은 새로 나온 기능들.
+
+## 69강 알랜드 소개 섹션 스타일링
+
+- 인라인은 블럭태그를 감쌀 수 있는 친구가 아니다.
+- padding 값을 잘 주어야 한다.
+
+## 70강 CSS3에서 확장된 변형 속성 2
+
+- transform - mdn 사이트 참고
+- 트랜지션 속성을 부여해야 움직임이 발생한다. (트랜스폼이 움직임을 부여해주는 것은 아님.)
+- transition : width 1s, transform 2s 1s; (마지막 초는 delay)
+- transform-origin: 0 0;(좌상단이 기준점)
+- transition-duration:
+- transition-property:
+- transition-timingfunction:;
+- transition-delay: ;
+
+- margin은 박스 크기가 커진다.
+
+- 이름을 다 지정하는 이유: 구조 추가에서 자유롭다.
+- 단점: 이름 중복이 일어날 수 있다. 이름 구조를 잘 잡아서 사용해야 한다. (단점이라기 보다는 유의해야할 점.)
+
+## 71강 Timing Function
+
+1. Easing Function
+
+- 움직이게 되는 구간마다의 속도에 대한 종류가 많다.
+- linear
+
+2. 계단식 Transition
+
+- steps(6,end);
+
+## 72강 애니메이션
+
+1. 트랜지션과 애니메이션
+
+- 트랜지션 : 시작과 끝이 있고 쭈욱 재생되는 것
+- 애니메이션 : 중간중간 지점이 있어서 프레임마다 다르게 재생될 수 있는 것.
+
+2. 애니메이션
+
+- animation
+
+```css
+@keyframes rotate-out {
+  from {
+    transform: ;
+  }
+  20% {
+    height: 2px;
+  }
+
+  to {
+    height: 2px;
+    transform: rotate(360deg) translate;
+  }
+}
+```
