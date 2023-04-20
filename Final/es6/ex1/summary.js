@@ -54,6 +54,7 @@ let exp1 = /<\w+> .+ <\/\w+>+ /g;
 let result = st.match(exp1);
 console.log(result);
 }
+
 // ---- Iterator 구현을 쉽게 해주는 생성기 (Generators) ----
 { 
   let exam = {
