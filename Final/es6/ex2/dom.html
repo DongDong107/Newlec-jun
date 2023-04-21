@@ -26,11 +26,57 @@
         color: white;
         font-weight: bold;
         background-color: orange;
+        /* transition: all 1s;
+         */
+
+         
+      }
+
+      .s2 li.current span,
+      .s2 li.current .box{
+        background-color: red;
+        animation-name: current;
+        animation-duration: 1.5s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        /* transform: scale(1.2,1.2); */
+      }
+
+      @keyframes current {
+        from {
+          transform: scale(1,1);
+        }
+
+        30%{
+          transform: rotate(360deg);
+        }
+
+        60%{
+          transform: rotate(-360deg);
+        }
+        to {
+          transform: scale(1.2,1.2);
+        }
+      }
+
+      @keyframes selectdani {
+        from {
+          transform: rotate(0deg);
+          
+        }
+
+        to {
+          transform: rotate(360deg);
+        }
       }
     </style>
     <ul>
       <li><span>1</span></li>
-      <li><span>2</span></li>
+      <li>
+        <div>
+          <span>2</span>        
+        </div>
+      </li>
       <li><span>3</span></li>
       <li><span>4</span></li>
     </ul>
