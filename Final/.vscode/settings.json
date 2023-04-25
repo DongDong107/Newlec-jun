@@ -1,0 +1,5 @@
+{
+  "java.compile.nullAnalysis.mode": "automatic",
+  "vue.features.codeActions.enable": false,
+  "java.configuration.updateBuildConfiguration": "automatic"
+}
