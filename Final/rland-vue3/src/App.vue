@@ -27,6 +27,7 @@ export default {
 import { computed, onBeforeMount, onBeforeUnmount, onMounted, reactive, ref, shallowRef, triggerRef, watch } from 'vue';
 import Header from './components/Header.vue'
 import NewList from './components/NewMenus.vue'
+import Modal from './components/Modal.vue'
 
 // ref({}) 도 되긴 되지만, 객체를 twoway 해주는건 reactive()
 let menu = reactive({
@@ -108,11 +109,28 @@ function inputHandler() {
   triggerRef(aa);
 }
 
+let showModal = ref(false);
+
+function showHandler() {
+  showModal.value = true;
+}
+
+function dlgOkHandler(a) {
+  showModal.value = false;
+  console.log(a);
+}
 </script>
 
 <template>
   <Header />
-
+  <div>
+    <button @click="showHandler">show</button>
+  </div>
+  <Modal title="공지사항" :show="showModal" @ok="dlgOkHandler">
+    <div>
+      안녕하세요sdfdsfafdssfasf
+    </div>
+  </Modal>
   <div>
     <div>
       <label for="">검색</label>
