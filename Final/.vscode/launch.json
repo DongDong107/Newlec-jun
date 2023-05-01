@@ -2,11 +2,11 @@
   "configurations": [
     {
       "type": "java",
-      "name": "Spring Boot-WebApplication<web>",
+      "name": "Spring Boot-RlandApiApplication<rland-api>",
       "request": "launch",
       "cwd": "${workspaceFolder}",
-      "mainClass": "com.rland.web.WebApplication",
-      "projectName": "web",
+      "mainClass": "kr.co.rland.rlandapi.RlandApiApplication",
+      "projectName": "rland-api",
       "args": "",
       "envFile": "${workspaceFolder}/.env"
     }
