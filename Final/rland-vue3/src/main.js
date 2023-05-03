@@ -1,6 +1,9 @@
 import { createApp } from 'vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
 import App from './App.vue'
+import Layout from './components/inc/Layout.vue'
+import Login from './components/Login.vue'
+import Index from './components/Index.vue'
 
 // import './assets/main.css'
 
@@ -8,17 +11,11 @@ import App from './App.vue'
 // Each route should map to a component.
 // We'll talk about nested routes later.
 const routes = [
-  { path: '/index', component: Index},
+  
 
-  { path: '/', component: Layout, children[
+  { path: '/', component: Layout, children:[
+    { path: 'index', component: Index},
     { path: 'login', component: Login}
-  ] },
-
-  { path: '/admin', component: AdminLayout, children[
-      { path: 'menus', component: MenuLayout, children[
-          { path: 'list', component: MenuList},
-          { path: 'detail', component: MenuDetail},
-      ]}
   ] },
   
 ]
@@ -34,4 +31,4 @@ const router = createRouter({
 
 // Vue.createApp() -> Global Library
 
-createApp(App).mount('#app') // -> ES6
+createApp(App).use(router).mount('#app') // -> ES6

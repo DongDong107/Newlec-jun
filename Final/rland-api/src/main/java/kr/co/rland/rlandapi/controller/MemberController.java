@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import kr.co.rland.rlandapi.entity.Member;
 import kr.co.rland.rlandapi.service.MemberService;
 
 @RestController
@@ -19,13 +20,19 @@ public class MemberController {
   @Autowired
   private MemberService service;
 
-  @GetMapping("isvalid")
+  @GetMapping("login")
   public ResponseEntity<Map<String, Object>> isVaild(String userName, String password) {
-    Map<String, Object> dto = new HashMap<>();
-    dto.put("result", false);
 
-    if (service.isVaild(userName, password))
-      dto.put("result", true);
+    System.out.println(userName);
+    System.out.println(password);
+
+    Map<String, Object> dto = new HashMap<>();
+    dto.put("result", null);
+
+    if (service.isVaild(userName, password)) {
+      Member member = service.getByUsername(userName);
+      dto.put("result", member);
+    }
 
     return new ResponseEntity<Map<String, Object>>(dto, HttpStatus.OK);
   }
