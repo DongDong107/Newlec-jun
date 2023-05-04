@@ -1,3 +1,6 @@
+<script setup>
+import UserDetails from '../../store/UserDetails.js';
+</script>
 <template>
     <header class="header-container">
         <h1 class="d-none">알랜드</h1>
@@ -14,7 +17,10 @@
                     <a href="index.html" class="icon icon-home" title="index페이지로 이동합니다.">홈</a>
                 </li>
                 <li>
-                    <router-link to="/login" class="icon icon-sign-on" title="로그인">로그인</router-link>
+                    <router-link v-if="UserDetails.username == ''" to="/login" class="icon icon-sign-on"
+                        title="로그인">로그인</router-link>
+                    <router-link v-if="UserDetails.username != ''" to="/logout" class="icon icon-sign-out"
+                        title="로그아웃">로그아웃</router-link>
                 </li>
             </ul>
         </nav>
