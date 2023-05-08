@@ -1,9 +1,13 @@
 import { createApp } from 'vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
+import { createPinia } from 'pinia'
 import App from './App.vue'
 import Layout from './components/inc/Layout.vue'
 import Login from './components/Login.vue'
 import Index from './components/Index.vue'
+
+import AdminLayout from './components/admin/inc/Layout.vue'
+import AdminMenuList from './components/admin/menu/List.vue'
 
 // import './assets/main.css'
 
@@ -17,6 +21,14 @@ const routes = [
     { path: 'index', component: Index},
     { path: 'login', component: Login}
   ] },
+  { path: '/admin', component: AdminLayout, children:[
+    { path: 'menu', children:[
+      {path : 'list', component: AdminMenuList},
+      beforeRouteEnter(to, from, next){
+        console.log("히히 못가");
+      }
+    ] }
+  ]}
   
 ]
 
@@ -29,6 +41,11 @@ const router = createRouter({
   routes, // short for `routes: routes`
 })
 
+const pinia = createPinia();
+
 // Vue.createApp() -> Global Library
 
-createApp(App).use(router).mount('#app') // -> ES6
+createApp(App)
+.use(pinia)
+.use(router)
+.mount('#app') // -> ES6

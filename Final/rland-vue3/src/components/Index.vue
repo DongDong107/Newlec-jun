@@ -1,5 +1,5 @@
 <script setup>
-import UserDetails from '../store/UserDetails.js';
+import UserDetails from '../stores/UserDetails.js';
 </script>
 
 <template>

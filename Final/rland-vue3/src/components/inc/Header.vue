@@ -1,5 +1,17 @@
 <script setup>
-import UserDetails from '../../store/UserDetails.js';
+// import UserDetails from '../../stores/UserDetails.js';
+import { useUserDetailsStore } from '../../stores/useUserDetailsStore.js';
+import { useRouter } from 'vue-router';
+
+let userDetails = useUserDetailsStore();
+let router = useRouter();
+
+function logoutHandler() {
+
+    userDetails.logout();
+
+    router.push("/index");
+}
 </script>
 <template>
     <header class="header-container">
@@ -17,10 +29,13 @@ import UserDetails from '../../store/UserDetails.js';
                     <a href="index.html" class="icon icon-home" title="index페이지로 이동합니다.">홈</a>
                 </li>
                 <li>
-                    <router-link v-if="UserDetails.username == ''" to="/login" class="icon icon-sign-on"
+                    <router-link to="/admin/menu/list" class="icon icon-setting" title="메뉴관리"></router-link>
+                </li>
+                <li>
+                    <router-link v-if="!userDetails.isAuthenticated" to="/login" class="icon icon-sign-on"
                         title="로그인">로그인</router-link>
-                    <router-link v-if="UserDetails.username != ''" to="/logout" class="icon icon-sign-out"
-                        title="로그아웃">로그아웃</router-link>
+                    <router-link v-if="userDetails.isAuthenticated" to="/logout" class="icon icon-sign-out" title="로그아웃"
+                        @click.prevent="logoutHandler">로그아웃</router-link>
                 </li>
             </ul>
         </nav>

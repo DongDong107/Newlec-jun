@@ -4,7 +4,7 @@
     <ul>
       <li><a href="" class="icon icon-close">취소</a></li>
       <li><a href="index.html" class="">홈</a></li>
-      <li><a href="/menu/list.html">주문하기</a></li>
+      <li><a href="admin/menu/list.html">메뉴 관리</a></li>
       <li><a href="">로그아웃</a></li>
     </ul>
   </aside>

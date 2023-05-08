@@ -1,6 +1,11 @@
 <script setup>
 import { reactive } from 'vue';
-import userDetails from '../store/UserDetails.js';
+// import userDetails from '../stores/UserDetails.js';
+import { useUserDetailsStore } from '../stores/useUserDetailsStore.js';
+import { useRouter } from 'vue-router';
+
+let userDetails = useUserDetailsStore();
+let router = useRouter();
 
 let user = reactive({
   username: "newlec",
@@ -26,7 +31,12 @@ async function loginHandler() {
   userDetails.password = json.result.pwd;
   userDetails.email = json.result.email;
 
+
   console.log(userDetails);
+
+
+
+  router.push("/index");
 }
 
 </script>
