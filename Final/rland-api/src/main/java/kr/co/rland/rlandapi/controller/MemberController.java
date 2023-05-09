@@ -35,6 +35,7 @@ public class MemberController {
     if (service.isVaild(userName, password)) {
       Member member = service.getByUsername(userName);
       dto.put("result", member);
+      dto.put("roles", new String[] { "ADMIN", "TEACHER" });
     }
 
     return new ResponseEntity<Map<String, Object>>(dto, HttpStatus.OK);

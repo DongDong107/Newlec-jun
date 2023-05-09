@@ -1,3 +1,13 @@
+<script setup>
+import { ref } from 'vue';
+let showRcmdMenu = ref(false);
+
+function showHandler() {
+  showRcmdMenu.value = true;
+
+}
+
+</script>
 <template>
   <!-- ----------------------메인---------------------------- -->
   <main>
@@ -50,7 +60,7 @@
           <h2>Espresso</h2>
           <div>2,500원</div>
           <div>
-            <a class="icon icon-arrow-up">추천메뉴 보기</a>
+            <a class="icon icon-arrow-up" @click.prevent="showHandler">추천메뉴 보기</a>
           </div>
           <div>
             <a href="" class="icon icon-lg icon-pencil">수정</a>
@@ -58,62 +68,64 @@
           </div>
         </section>
         <!-- ----------------추천메뉴 목록 -->
-        <section class="recommend-menu-section">
-          <div class="bl-2 pl-12 flex-cloumn-gap-12">
-            <h1>추천 메뉴</h1>
-            <section class="menu-delete-section">
-              <h1 class="d-none">메뉴 목록</h1>
-              <section class="menu">
-                <div>
-                  <a href="">
-                    <img src="/image/espresso.svg" alt="에스프레소" />
-                  </a>
-                </div>
-                <h1>에스프레소</h1>
-                <h2>Espresso</h2>
-                <div>2,500원</div>
-                <div>
-                  <a href="" class="icon icon-trash">삭제</a>
-                </div>
-              </section>
-              <section class="menu">
-                <div>
-                  <a href="">
-                    <img src="/image/espresso.svg" alt="에스프레소" />
-                  </a>
-                </div>
-                <h1>에스프레소</h1>
-                <h2>Espresso</h2>
-                <div>2,500원</div>
-                <div>
-                  <a href="" class="icon icon-trash">삭제</a>
-                </div>
-              </section>
-              <section class="menu">
-                <div>
-                  <a href="">
-                    <img src="/image/espresso.svg" alt="에스프레소" />
-                  </a>
-                </div>
-                <h1>에스프레소</h1>
-                <h2>Espresso</h2>
-                <div>2,500원</div>
-                <div>
-                  <a href="" class="icon icon-trash">삭제</a>
-                </div>
-              </section>
+        <Transition>
+          <section class="recommend-menu-section" v-if="showRcmdMenu">
+            <div class="bl-2 pl-12 flex-cloumn-gap-12">
+              <h1>추천 메뉴</h1>
+              <section class="menu-delete-section">
+                <h1 class="d-none">메뉴 목록</h1>
+                <section class="menu">
+                  <div>
+                    <a href="">
+                      <img src="/image/espresso.svg" alt="에스프레소" />
+                    </a>
+                  </div>
+                  <h1>에스프레소</h1>
+                  <h2>Espresso</h2>
+                  <div>2,500원</div>
+                  <div>
+                    <a href="" class="icon icon-trash">삭제</a>
+                  </div>
+                </section>
+                <section class="menu">
+                  <div>
+                    <a href="">
+                      <img src="/image/espresso.svg" alt="에스프레소" />
+                    </a>
+                  </div>
+                  <h1>에스프레소</h1>
+                  <h2>Espresso</h2>
+                  <div>2,500원</div>
+                  <div>
+                    <a href="" class="icon icon-trash">삭제</a>
+                  </div>
+                </section>
+                <section class="menu">
+                  <div>
+                    <a href="">
+                      <img src="/image/espresso.svg" alt="에스프레소" />
+                    </a>
+                  </div>
+                  <h1>에스프레소</h1>
+                  <h2>Espresso</h2>
+                  <div>2,500원</div>
+                  <div>
+                    <a href="" class="icon icon-trash">삭제</a>
+                  </div>
+                </section>
 
-              <!-- ----------------상품추가 박스 pc small-->
-              <a href="../menu/reg.html" class="menu-add-box-pc-sm">
-                <span class="icon icon-plus-circle"></span>
-              </a>
-              <!-- ----------------상품추가 박스 모바일 -->
-              <a href="../menu/reg.html" class="menu-add-box-mobile">
-                <span class="icon icon-plus-circle"></span>
-              </a>
-            </section>
-          </div>
-        </section>
+                <!-- ----------------상품추가 박스 pc small-->
+                <a href="../menu/reg.html" class="menu-add-box-pc-sm">
+                  <span class="icon icon-plus-circle"></span>
+                </a>
+                <!-- ----------------상품추가 박스 모바일 -->
+                <a href="../menu/reg.html" class="menu-add-box-mobile">
+                  <span class="icon icon-plus-circle"></span>
+                </a>
+              </section>
+            </div>
+          </section>
+        </Transition>
 
         <section class="menu">
           <div>
@@ -191,7 +203,18 @@
   </main>
 </template>
 
-<style scoped>
+<style>
 @import url("/css/menu.css");
 @import url("/css/admin/menu/list.css");
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
 </style>

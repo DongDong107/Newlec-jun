@@ -2,12 +2,9 @@ import { createApp } from 'vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { createPinia } from 'pinia'
 import App from './App.vue'
-import Layout from './components/inc/Layout.vue'
-import Login from './components/Login.vue'
-import Index from './components/Index.vue'
 
-import AdminLayout from './components/admin/inc/Layout.vue'
-import AdminMenuList from './components/admin/menu/List.vue'
+import adminRoute from './components/admin/route.js'
+import rootRoute from './components/route.js'
 
 // import './assets/main.css'
 
@@ -15,20 +12,9 @@ import AdminMenuList from './components/admin/menu/List.vue'
 // Each route should map to a component.
 // We'll talk about nested routes later.
 const routes = [
-  
 
-  { path: '/', component: Layout, children:[
-    { path: 'index', component: Index},
-    { path: 'login', component: Login}
-  ] },
-  { path: '/admin', component: AdminLayout, children:[
-    { path: 'menu', children:[
-      {path : 'list', component: AdminMenuList},
-      beforeRouteEnter(to, from, next){
-        console.log("히히 못가");
-      }
-    ] }
-  ]}
+  rootRoute,
+  adminRoute
   
 ]
 
