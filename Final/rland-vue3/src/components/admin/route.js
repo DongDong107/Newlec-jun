@@ -1,5 +1,6 @@
 import Layout from './inc/Layout.vue'
 import MenuList from './menu/List.vue'
+import MenuDetail from './menu/Detail.vue'
 import Index from './Index.vue'
 
 import {useUserDetailsStore} from '../../stores/useUserDetailsStore.js'
@@ -18,6 +19,11 @@ const admin = {
         { 
           path : 'list', 
           component: MenuList, 
+        },
+        {
+          // path: 'detail', // /admin.menu/detail?id=3
+          path: ':id',
+          component: MenuDetail
         }
       ]
     }

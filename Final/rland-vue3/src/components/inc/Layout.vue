@@ -9,7 +9,15 @@ import Aside from './Aside.vue';
   <Header />
   <Aside />
 
-  <router-view></router-view>
+  <Transition name="fade">
+    <router-view></router-view>
+  </Transition>
+  <!-- 
+  <router-view v-slot="{ Component }">
+    <transition name="fade">
+      <component :is="Component" />
+    </transition>
+  </router-view> -->
 
   <Footer />
   <!-- 메인페이지 가운데 빗금 문양 -->
@@ -23,5 +31,15 @@ import Aside from './Aside.vue';
 <style scoped>
 body {
   background-color: var(--color-bg-2);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

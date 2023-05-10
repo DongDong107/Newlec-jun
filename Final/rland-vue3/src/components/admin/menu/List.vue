@@ -52,9 +52,9 @@ function showHandler() {
 
         <section class="menu">
           <div>
-            <a href="../../anonymous/menu/detail.html">
+            <router-link to="./3">
               <img src="/image/espresso.svg" alt="에스프레소" />
-            </a>
+            </router-link>
           </div>
           <h1>에스프레소</h1>
           <h2>Espresso</h2>
