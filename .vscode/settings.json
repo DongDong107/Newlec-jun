@@ -1,4 +1,5 @@
 {
-    "livePreview.defaultPreviewPath": "d:\\Workspace\\JavaPrj\\ECMA5\\브라우저객체.html",
-    "liveServer.settings.port": 5501
+  "livePreview.defaultPreviewPath": "d:\\Workspace\\JavaPrj\\ECMA5\\브라우저객체.html",
+  "liveServer.settings.port": 5501,
+  "java.debug.settings.onBuildFailureProceed": true
 }

@@ -5,6 +5,7 @@ import App from './App.vue'
 
 import adminRoute from './components/admin/route.js'
 import rootRoute from './components/route.js'
+import vue3GoogleLogin from 'vue3-google-login'
 
 // import './assets/main.css'
 
@@ -34,4 +35,10 @@ const pinia = createPinia();
 createApp(App)
 .use(pinia)
 .use(router)
+.use(vue3GoogleLogin, {
+  clientId: '824324547787-dhrf9o0rurdcclahpfko8sc1khsgkfte.apps.googleusercontent.com'
+  
+
+})
+
 .mount('#app') // -> ES6

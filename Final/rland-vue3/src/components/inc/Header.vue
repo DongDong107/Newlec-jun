@@ -1,5 +1,6 @@
 <script setup>
 // import UserDetails from '../../stores/UserDetails.js';
+import { googleAuthCodeLogin, googleLogout } from 'vue3-google-login';
 import { useUserDetailsStore } from '../../stores/useUserDetailsStore.js';
 import { useRouter } from 'vue-router';
 
@@ -9,6 +10,8 @@ let router = useRouter();
 function logoutHandler() {
 
     userDetails.logout();
+
+    googleLogout();
 
     router.push("/index");
 }

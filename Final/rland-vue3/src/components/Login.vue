@@ -3,6 +3,7 @@ import { reactive } from 'vue';
 // import userDetails from '../stores/UserDetails.js';
 import { useUserDetailsStore } from '../stores/useUserDetailsStore.js';
 import { useRouter, useRoute } from 'vue-router';
+import { decodeCredential } from 'vue3-google-login';
 
 let userDetails = useUserDetailsStore();
 let router = useRouter();
@@ -43,8 +44,30 @@ async function loginHandler() {
     router.push(returnURL);
   else
     router.push("/index");
+
 }
 
+function googleLoginHandler(response) {
+  let userData = decodeCredential(response.credential);
+  console.log(userData);
+  // console.log(response);
+
+  userDetails.username = userData.name;
+  userDetails.email = userData.email;
+  userDetails.roles = ["ADMIN", "MEMBER"];
+
+
+  // console.log(userDetails);
+
+  console.log(route.query);
+  let returnURL = route.query.returnURL;
+
+  if (returnURL)
+    router.push(returnURL);
+  else
+    router.push("/index");
+
+}
 </script>
 
 <template>
@@ -69,7 +92,8 @@ async function loginHandler() {
           </div>
           <div class="font-14">또는</div>
           <div class="wd-100">
-            <a href="" class="deco icon-logo-google btn btn-outline">구글로 로그인</a>
+            <!-- <a href="" class="deco icon-logo-google btn btn-outline">구글로 로그인</a> -->
+            <GoogleLogin :callback="googleLoginHandler" />
           </div>
         </div>
       </form>
