@@ -68,6 +68,19 @@ function googleLoginHandler(response) {
     router.push("/index");
 
 }
+
+function customLoginHandler(response) {
+  fetch(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${response.access_token}`)
+    .then(res => res.json())
+    .then(credential => {
+      console.log(credential);
+    })
+    .catch(e => {
+      console.log(
+        "error"
+      );
+    })
+}
 </script>
 
 <template>
@@ -92,7 +105,11 @@ function googleLoginHandler(response) {
           </div>
           <div class="font-14">또는</div>
           <div class="wd-100">
-            <!-- <a href="" class="deco icon-logo-google btn btn-outline">구글로 로그인</a> -->
+            <GoogleLogin :callback="customLoginHandler" class="wd-100" popup-type="TOKEN">
+              <span class="deco icon-logo-google btn btn-outline">구글로 로그인</span>
+            </GoogleLogin>
+          </div>
+          <div>
             <GoogleLogin :callback="googleLoginHandler" />
           </div>
         </div>
