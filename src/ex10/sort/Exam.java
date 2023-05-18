@@ -1,6 +1,6 @@
 package ex10.sort;
 
-public class Exam {
+public class Exam implements Comparable<Exam> {
   private int kor;
   private int eng;
   private int math;
@@ -47,6 +47,12 @@ public class Exam {
   @Override
   public String toString() {
     return "Exam [kor=" + kor + ", eng=" + eng + ", math=" + math + "]";
+  }
+
+  @Override
+  public int compareTo(Exam exam) {
+
+    return this.total() - exam.total();
   }
 
 }
