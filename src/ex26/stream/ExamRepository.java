@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
+import java.util.OptionalInt;
 
 public class ExamRepository {
 
@@ -48,22 +49,24 @@ public class ExamRepository {
   
 
     public int getKorSum() {
-        int result = 0;
+        OptionalInt result = null;
         try {
             result = Files
                     .lines(Path.of("res/data0518.csv"))
                     .skip(1)
                     .map(Exam::fromCSV)
-                    .map(exam -> exam.getKor())
-                    // .mapToInt(n->n.intValue())
-                    .mapToInt(Integer::intValue)
-                    .sum();
+                    .mapToInt(exam -> exam.getKor())
+                    .reduce((a,b)->a+b);
+                    // .map(exam -> exam.getKor())
+                    // // .mapToInt(n->n.intValue())
+                    // .mapToInt(Integer::intValue)
+                    // .sum();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
-        return result;
+        return result.getAsInt();
     }
 
     public List<Exam> getList(int page){
